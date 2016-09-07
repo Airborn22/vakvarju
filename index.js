@@ -30,7 +30,7 @@ request('http://pest.vakvarju.com/hu/napimenu', function(err, resp, body){
       console.log('Error: ', err.message);
       return;
     }
-    
+
     console.log('Done:');
     console.log(commentText);
   });
