@@ -1,10 +1,15 @@
 var request = require('request')
 var cheerio = require('cheerio');
 
+var dayOfWeek = (new Date()).getDay();
+if (dayOfWeek < 1 || dayOfWeek > 5) {
+  process.exit(1);
+}
+
 request('http://pest.vakvarju.com/hu/napimenu', function(err, resp, body){
   $ = cheerio.load(body);
   allDays = $('#etlapfelsorol .item');
-  currentDay = $( allDays[ (new Date()).getDay()-1 ] );
+  currentDay = $(allDays[dayOfWeek-1]);
 
   var commentText = '![' + currentDay.find('.nev').text() + '](' + currentDay.find('.image').attr('style').match(/url\('(.*)'\)/i)[1] + ')';
   commentText += '\n' + currentDay.find('.text h2').text();
