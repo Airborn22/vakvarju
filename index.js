@@ -20,8 +20,13 @@ request('http://pest.vakvarju.com/hu/napimenu', function(err, resp, body){
     json: {
       body: commentText
     }
-  }, function(){
-    console.log('done');
-    console.log( commentText );
+  }, function(err) {
+    if (err) {
+      console.log('Error: ', err.message);
+      return;
+    }
+    
+    console.log('Done:');
+    console.log(commentText);
   });
 });
